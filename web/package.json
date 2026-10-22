@@ -1,0 +1,14 @@
+{
+  "name": "orderflow-workbench",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write *.js *.css *.html",
+    "format:check": "prettier --check *.js *.css *.html",
+    "check": "node --check app.js && node --check api.js && node --check format.js && node --check labels.js && node --check render.js && node --check decision.js && node --check approval.js && node --check progress.js && node --check task-actions.js",
+    "test": "node --test *.test.js"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
+}

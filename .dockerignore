@@ -1,0 +1,14 @@
+.git
+.venv
+.bootstrap
+.runtime
+.env
+.env.*
+!.env.example
+!.env.dashscope.example
+__pycache__
+.pytest_cache
+*.pyc
+*.log
+.coverage
+**/node_modules

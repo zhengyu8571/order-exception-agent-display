@@ -1,0 +1,1136 @@
+{
+  "version": 1,
+  "source": "synthetic-personal-project",
+  "cases": [
+    {
+      "id": "Q001",
+      "family": "simple_transfer",
+      "pilot": true,
+      "required_quantity": 80,
+      "local_quantity": 60,
+      "due_days": 2,
+      "allow_split": false,
+      "minimum_first_quantity": 40,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 1,
+          "cost_cents": 100
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q002",
+      "family": "simple_transfer",
+      "pilot": false,
+      "required_quantity": 90,
+      "local_quantity": 70,
+      "due_days": 3,
+      "allow_split": false,
+      "minimum_first_quantity": 50,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 2,
+          "cost_cents": 150
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q003",
+      "family": "simple_transfer",
+      "pilot": false,
+      "required_quantity": 100,
+      "local_quantity": 80,
+      "due_days": 4,
+      "allow_split": false,
+      "minimum_first_quantity": 60,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 1,
+          "cost_cents": 200
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q004",
+      "family": "simple_transfer",
+      "pilot": false,
+      "required_quantity": 110,
+      "local_quantity": 90,
+      "due_days": 2,
+      "allow_split": false,
+      "minimum_first_quantity": 70,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 2,
+          "cost_cents": 250
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q005",
+      "family": "simple_transfer",
+      "pilot": false,
+      "required_quantity": 120,
+      "local_quantity": 100,
+      "due_days": 3,
+      "allow_split": false,
+      "minimum_first_quantity": 80,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 1,
+          "cost_cents": 300
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q006",
+      "family": "cost_deadline_tradeoff",
+      "pilot": true,
+      "required_quantity": 80,
+      "local_quantity": 40,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 40,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 1,
+          "cost_cents": 400
+        },
+        {
+          "id": "WH-003",
+          "quantity": 40,
+          "days": 3,
+          "cost_cents": 80
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q007",
+      "family": "cost_deadline_tradeoff",
+      "pilot": true,
+      "required_quantity": 90,
+      "local_quantity": 50,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 50,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 1,
+          "cost_cents": 450
+        },
+        {
+          "id": "WH-003",
+          "quantity": 40,
+          "days": 4,
+          "cost_cents": 90
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q008",
+      "family": "cost_deadline_tradeoff",
+      "pilot": false,
+      "required_quantity": 100,
+      "local_quantity": 60,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 60,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 1,
+          "cost_cents": 500
+        },
+        {
+          "id": "WH-003",
+          "quantity": 40,
+          "days": 3,
+          "cost_cents": 100
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q009",
+      "family": "cost_deadline_tradeoff",
+      "pilot": false,
+      "required_quantity": 110,
+      "local_quantity": 70,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 70,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 1,
+          "cost_cents": 550
+        },
+        {
+          "id": "WH-003",
+          "quantity": 40,
+          "days": 4,
+          "cost_cents": 110
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q010",
+      "family": "cost_deadline_tradeoff",
+      "pilot": false,
+      "required_quantity": 120,
+      "local_quantity": 80,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 80,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 1,
+          "cost_cents": 600
+        },
+        {
+          "id": "WH-003",
+          "quantity": 40,
+          "days": 3,
+          "cost_cents": 120
+        }
+      ],
+      "batches": []
+    },
+    {
+      "id": "Q011",
+      "family": "split_required",
+      "pilot": true,
+      "required_quantity": 80,
+      "local_quantity": 40,
+      "due_days": 5,
+      "allow_split": true,
+      "minimum_first_quantity": 40,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 7,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q012",
+      "family": "split_required",
+      "pilot": true,
+      "required_quantity": 90,
+      "local_quantity": 50,
+      "due_days": 5,
+      "allow_split": true,
+      "minimum_first_quantity": 50,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 8,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 9,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q013",
+      "family": "split_required",
+      "pilot": false,
+      "required_quantity": 100,
+      "local_quantity": 60,
+      "due_days": 5,
+      "allow_split": true,
+      "minimum_first_quantity": 60,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 7,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q014",
+      "family": "split_required",
+      "pilot": false,
+      "required_quantity": 110,
+      "local_quantity": 70,
+      "due_days": 5,
+      "allow_split": true,
+      "minimum_first_quantity": 70,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 8,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 9,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q015",
+      "family": "split_required",
+      "pilot": false,
+      "required_quantity": 120,
+      "local_quantity": 80,
+      "due_days": 5,
+      "allow_split": true,
+      "minimum_first_quantity": 80,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 7,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q016",
+      "family": "split_forbidden",
+      "pilot": true,
+      "required_quantity": 80,
+      "local_quantity": 40,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 40,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 7,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q017",
+      "family": "split_forbidden",
+      "pilot": false,
+      "required_quantity": 90,
+      "local_quantity": 50,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 50,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 8,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 9,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q018",
+      "family": "split_forbidden",
+      "pilot": false,
+      "required_quantity": 100,
+      "local_quantity": 60,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 60,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 7,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q019",
+      "family": "split_forbidden",
+      "pilot": false,
+      "required_quantity": 110,
+      "local_quantity": 70,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 70,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 8,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 9,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q020",
+      "family": "split_forbidden",
+      "pilot": false,
+      "required_quantity": 120,
+      "local_quantity": 80,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 80,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 7,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 2,
+          "status": "EXPECTED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 20,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q021",
+      "family": "cancelled_batch",
+      "pilot": true,
+      "required_quantity": 80,
+      "local_quantity": 40,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 40,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 2,
+          "cost_cents": 120
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 1,
+          "status": "CANCELLED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 10,
+          "days": 7,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q022",
+      "family": "cancelled_batch",
+      "pilot": false,
+      "required_quantity": 90,
+      "local_quantity": 50,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 50,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 3,
+          "cost_cents": 140
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 1,
+          "status": "CANCELLED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 10,
+          "days": 7,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q023",
+      "family": "cancelled_batch",
+      "pilot": false,
+      "required_quantity": 100,
+      "local_quantity": 60,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 60,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 2,
+          "cost_cents": 160
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 1,
+          "status": "CANCELLED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 10,
+          "days": 7,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q024",
+      "family": "cancelled_batch",
+      "pilot": false,
+      "required_quantity": 110,
+      "local_quantity": 70,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 70,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 3,
+          "cost_cents": 180
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 1,
+          "status": "CANCELLED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 10,
+          "days": 7,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q025",
+      "family": "cancelled_batch",
+      "pilot": false,
+      "required_quantity": 120,
+      "local_quantity": 80,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 80,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 40,
+          "days": 2,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 1,
+          "status": "CANCELLED"
+        },
+        {
+          "id": "PO-004",
+          "quantity": 10,
+          "days": 7,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q026",
+      "family": "insufficient_total",
+      "pilot": true,
+      "required_quantity": 80,
+      "local_quantity": 30,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 40,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 1,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 3,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q027",
+      "family": "insufficient_total",
+      "pilot": false,
+      "required_quantity": 90,
+      "local_quantity": 40,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 50,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 1,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 3,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q028",
+      "family": "insufficient_total",
+      "pilot": false,
+      "required_quantity": 100,
+      "local_quantity": 50,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 60,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 1,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 3,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q029",
+      "family": "insufficient_total",
+      "pilot": false,
+      "required_quantity": 110,
+      "local_quantity": 60,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 70,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 1,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 3,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q030",
+      "family": "insufficient_total",
+      "pilot": false,
+      "required_quantity": 120,
+      "local_quantity": 70,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 80,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 10,
+          "days": 1,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 20,
+          "days": 3,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q031",
+      "family": "minimum_first_batch",
+      "pilot": true,
+      "required_quantity": 80,
+      "local_quantity": 10,
+      "due_days": 3,
+      "allow_split": true,
+      "minimum_first_quantity": 40,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 6,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 60,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q032",
+      "family": "minimum_first_batch",
+      "pilot": false,
+      "required_quantity": 90,
+      "local_quantity": 20,
+      "due_days": 3,
+      "allow_split": true,
+      "minimum_first_quantity": 50,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 6,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 60,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q033",
+      "family": "minimum_first_batch",
+      "pilot": false,
+      "required_quantity": 100,
+      "local_quantity": 30,
+      "due_days": 3,
+      "allow_split": true,
+      "minimum_first_quantity": 60,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 6,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 60,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q034",
+      "family": "minimum_first_batch",
+      "pilot": false,
+      "required_quantity": 110,
+      "local_quantity": 40,
+      "due_days": 3,
+      "allow_split": true,
+      "minimum_first_quantity": 70,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 6,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 60,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q035",
+      "family": "minimum_first_batch",
+      "pilot": false,
+      "required_quantity": 120,
+      "local_quantity": 50,
+      "due_days": 3,
+      "allow_split": true,
+      "minimum_first_quantity": 80,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 6,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 60,
+          "days": 8,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q036",
+      "family": "mixed_resources",
+      "pilot": true,
+      "required_quantity": 80,
+      "local_quantity": 30,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 40,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 1,
+          "cost_cents": 150
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 3,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q037",
+      "family": "mixed_resources",
+      "pilot": false,
+      "required_quantity": 90,
+      "local_quantity": 40,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 50,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 2,
+          "cost_cents": 175
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 4,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q038",
+      "family": "mixed_resources",
+      "pilot": false,
+      "required_quantity": 100,
+      "local_quantity": 50,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 60,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 1,
+          "cost_cents": 200
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 3,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q039",
+      "family": "mixed_resources",
+      "pilot": false,
+      "required_quantity": 110,
+      "local_quantity": 60,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 70,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 2,
+          "cost_cents": 225
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 4,
+          "status": "EXPECTED"
+        }
+      ]
+    },
+    {
+      "id": "Q040",
+      "family": "mixed_resources",
+      "pilot": false,
+      "required_quantity": 120,
+      "local_quantity": 70,
+      "due_days": 5,
+      "allow_split": false,
+      "minimum_first_quantity": 80,
+      "last_days": 10,
+      "warehouses": [
+        {
+          "id": "WH-002",
+          "quantity": 20,
+          "days": 1,
+          "cost_cents": 250
+        }
+      ],
+      "batches": [
+        {
+          "id": "PO-003",
+          "quantity": 40,
+          "days": 3,
+          "status": "EXPECTED"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:17.6
+    environment:
+      POSTGRES_USER: order_agent
+      POSTGRES_PASSWORD: order_agent_local
+      POSTGRES_DB: order_agent
+    ports: ["127.0.0.1:55432:5432"]
+    volumes: ["order-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U order_agent -d order_agent"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  orders:
+    build: .
+    command: ["uvicorn", "order_agent.business:app", "--host", "0.0.0.0", "--port", "8101"]
+    environment: &environment
+      DATABASE_URL: postgresql://order_agent:order_agent_local@postgres:5432/order_agent
+      SERVICE_TOKEN: ${SERVICE_TOKEN:-local-service}
+      OPERATOR_TOKEN: ${OPERATOR_TOKEN:-local-operator}
+      SUPERVISOR_TOKEN: ${SUPERVISOR_TOKEN:-local-supervisor}
+      ENABLE_FAULTS: ${ENABLE_FAULTS:-false}
+    depends_on:
+      postgres: {condition: service_healthy}
+    ports: ["127.0.0.1:8101:8101"]
+  agent:
+    build: .
+    command: ["uvicorn", "order_agent.api:app", "--host", "0.0.0.0", "--port", "8100"]
+    environment:
+      <<: *environment
+      ORDER_SERVICE_URL: http://orders:8101
+      PLANNER_MODE: ${PLANNER_MODE:-demo}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      LLM_MODEL: ${LLM_MODEL:-gpt-4.1-mini}
+      LLM_PROVIDER: ${LLM_PROVIDER:-openai-compatible}
+      MODEL_MAX_CALLS: ${MODEL_MAX_CALLS:-8}
+      MODEL_INPUT_BUDGET: ${MODEL_INPUT_BUDGET:-16000}
+      MODEL_OUTPUT_BUDGET: ${MODEL_OUTPUT_BUDGET:-6000}
+      MODEL_OUTPUT_PER_CALL: ${MODEL_OUTPUT_PER_CALL:-1600}
+      MODEL_TIMEOUT_SECONDS: ${MODEL_TIMEOUT_SECONDS:-45}
+    depends_on: [orders]
+    ports: ["127.0.0.1:8100:8100"]
+volumes:
+  order-data:

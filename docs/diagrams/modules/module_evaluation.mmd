@@ -1,0 +1,29 @@
+flowchart TB
+    accTitle: OrderFlow 决策评测模块架构
+ENTRY["评测脚本 / 显式 live 入口"]
+    subgraph CORE["决策评测模块"]
+        DATA["cases.json / dataset.py<br/>固定语料与日期实例化"]
+        HARNESS["harness.py<br/>统一评测编排"]
+        BASE["baseline.py / strategies.py<br/>规则基线与有界枚举参照"]
+        TOOLS["tools.py / FixtureTools<br/>案例只读工具"]
+        SCORE["scoring.py<br/>分母、失败、延迟与费用"]
+        HOLD["holdout.py<br/>源码、语料冻结与轮次比较"]
+        HARNESS --> DATA
+        HARNESS --> BASE
+        HARNESS --> TOOLS
+        HARNESS --> SCORE
+        HOLD --> HARNESS
+    end
+    GRAPH["生产 Agent 图与模型适配<br/>仅推进至审批或停止边界"]
+    REPORT["📊 逐例结果与聚合指标"]
+    ENTRY --> HARNESS
+    ENTRY --> HOLD
+    HARNESS --> GRAPH
+    GRAPH -->|"注入案例工具"| TOOLS
+    SCORE --> REPORT
+    class DATA,HARNESS,BASE,TOOLS,SCORE,HOLD component
+    class ENTRY,GRAPH,REPORT external
+classDef component fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef framework fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef durable fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    classDef external fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,color:#334155

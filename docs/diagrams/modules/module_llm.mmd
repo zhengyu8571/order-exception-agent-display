@@ -1,0 +1,25 @@
+flowchart TB
+    accTitle: OrderFlow 模型接入与调用治理模块架构
+NODE["Agent V2 决策节点"]
+    subgraph CORE["模型接入模块"]
+        DECIDE["decision_model.py<br/>Prompt、输入摘要与准入"]
+        TRANSPORT["transport.py<br/>统一截止时间与流响应处理"]
+        SDK["LangChain ChatOpenAI<br/>OpenAI 兼容协议"]
+        POOL["pool.py<br/>复用 HTTP 客户端与事件循环"]
+        PARSE["AgentDecision<br/>JSON 结构与动作校验"]
+        DECIDE --> TRANSPORT --> SDK
+        TRANSPORT --> POOL
+        DECIDE --> PARSE
+    end
+    LEDGER["💾 model_repository<br/>预算预留 / 响应复用 / usage 入账"]
+    PROVIDER["☁️ 外部模型供应商"]
+    NODE --> DECIDE
+    DECIDE -->|"reserve / finish"| LEDGER
+    SDK -->|"使用复用客户端请求"| PROVIDER
+    class DECIDE,TRANSPORT,POOL,PARSE component
+    class SDK framework
+    class NODE,PROVIDER,LEDGER external
+classDef component fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef framework fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef durable fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    classDef external fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,color:#334155

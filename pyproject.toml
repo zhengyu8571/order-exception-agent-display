@@ -1,0 +1,49 @@
+[project]
+name = "order-exception-agent"
+version = "0.1.0"
+description = "Recoverable manufacturing order exception workflow"
+license-files = ["THIRD_PARTY_NOTICES.md", "licenses/*.txt"]
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "fastapi==0.148.0",
+  "uvicorn==0.38.0",
+  "langgraph==1.2.16",
+  "langchain==1.4.6",
+  "langchain-openai==1.7.2",
+  "langgraph-checkpoint-postgres==3.2.0",
+  "psycopg[binary,pool]==3.3.6",
+  "httpx==0.28.1",
+  "pydantic-settings==2.12.0",
+  "tiktoken==0.14.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy==1.19.0",
+    "pytest==8.4.2",
+    "pytest-cov==7.0.0",
+    "ruff==0.14.1",
+]
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/order_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires real PostgreSQL and child HTTP processes", "live_llm: explicit opt-in for real external model calls"]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src/order_agent", "tests", "scripts"]
+# LangGraph/OpenAI 等依赖没有完整存根；类型检查的目标是本项目自己的状态和仓储边界。
+ignore_missing_imports = true

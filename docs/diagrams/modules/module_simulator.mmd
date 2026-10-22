@@ -1,0 +1,29 @@
+flowchart TB
+    accTitle: OrderFlow 独立订单模拟服务模块架构
+CLIENT["🔌 OrderTools / HTTP 调用方"]
+    subgraph CORE["订单模拟服务 · FastAPI :8101"]
+        API["api.py<br/>服务令牌与请求契约"]
+        READ["service.py<br/>订单、资源与操作查询"]
+        WRITE["service.py<br/>计划写入与幂等核查"]
+        RESOURCE["resources.py<br/>独立版本资源与锁定读取"]
+        PLANNING["planning.py / contracts.py<br/>场景构造与规划投影"]
+        TX["业务事务<br/>操作锁、乐观锁与原子提交"]
+        API --> READ
+        API --> WRITE --> TX
+        READ --> RESOURCE
+        TX --> RESOURCE
+        API --> PLANNING
+    end
+    DOMAIN["domain 业务规则<br/>最新日期、证据与摘要复核"]
+    DB[("💾 business schema<br/>订单 / 资源 / 操作账本")]
+    CLIENT -->|"HTTP / JSON"| API
+    TX --> DOMAIN
+    TX -->|"计划更新与账本一起提交"| DB
+    READ --> DB
+    class API,READ,WRITE,RESOURCE,PLANNING,TX component
+    class DOMAIN,CLIENT external
+    class DB durable
+classDef component fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef framework fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef durable fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    classDef external fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,color:#334155

@@ -1,0 +1,26 @@
+flowchart TB
+    accTitle: OrderFlow 业务契约与确定性规则模块架构
+CALLER["Agent 节点 / TaskService / 业务事务"]
+    subgraph CORE["业务契约与规则 · 纯计算"]
+        CONTRACT["contracts.py / decisions.py<br/>任务、动作、方案与写入契约"]
+        PYDANTIC["Pydantic<br/>严格字段与动作互斥约束"]
+        RULES["adaptive_rules.py<br/>数量、证据、时效与费用"]
+        DATE["scheduling.py<br/>当前日期与运输可用时间"]
+        BIND["bindings.py<br/>方案 / 证据 / 资源摘要"]
+        ERR["errors.py<br/>领域异常类型"]
+        CONTRACT --> PYDANTIC
+        RULES --> CONTRACT
+        RULES --> DATE
+        BIND -->|"规范 JSON + SHA-256"| HASH["批准内容身份"]
+    end
+    CALLER --> CONTRACT
+    CALLER --> RULES
+    CALLER --> BIND
+    CALLER --> ERR
+    class CONTRACT,RULES,DATE,BIND,ERR,HASH component
+    class PYDANTIC framework
+    class CALLER external
+classDef component fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef framework fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef durable fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    classDef external fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,color:#334155

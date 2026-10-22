@@ -1,0 +1,38 @@
+flowchart TB
+    accTitle: OrderFlow 系统架构
+    accDescr: 工作台通过 HTTP 和 SSE 访问 Agent API。LangGraph 调度受约束流程，模型只提供建议，独立模拟业务服务在事务中修改交付计划。一个 PostgreSQL 保存三类独立数据。
+    UI["👤 任务工作台<br/>原生 JavaScript · 审批 · 显式恢复"]
+    subgraph APP["Agent 服务 · FastAPI :8100"]
+        API["任务 API / TaskService<br/>身份校验 · 任务锁 · 事件游标"]
+        GRAPH["LangGraph StateGraph<br/>四路调查 · Send 补查 · Interrupt / Command"]
+        POLICY["项目业务协议<br/>规则校验 · 预算账本 · 审批摘要绑定"]
+        TOOLS["HTTP 工具适配<br/>白名单只读调查 · 批准后的幂等执行"]
+        API --> GRAPH
+        GRAPH --> POLICY
+        GRAPH --> TOOLS
+    end
+    MODEL["☁️ 外部模型 · OpenAI 兼容接口<br/>调查 / 提案 / 转人工；无业务写权限"]
+    subgraph BIZ["独立订单模拟服务 · FastAPI :8101"]
+        ORDERS["订单与资源 API<br/>事务内复核 · 乐观锁 · 稳定 operation_id"]
+    end
+    subgraph DB["💾 一个 PostgreSQL · 不同数据职责"]
+        CHECKPOINT[("LangGraph 框架表<br/>Checkpoint / pending writes")]
+        AGENTDB[("agent schema<br/>任务 · 审批 · 预算 · 持久事件")]
+        BIZDB[("business schema<br/>订单 · 模拟资源 · 操作账本")]
+    end
+    UI -->|"HTTP / JSON<br/>创建 · 审批 · 恢复"| API
+    API -.->|"SSE 持久进度<br/>可断线补读"| UI
+    GRAPH -->|"结构化决策请求"| MODEL
+    GRAPH -->|"PostgresSaver"| CHECKPOINT
+    API --> AGENTDB
+    POLICY --> AGENTDB
+    TOOLS -->|"HTTP / JSON"| ORDERS
+    ORDERS -->|"事务提交"| BIZDB
+    classDef frontend fill:#fff7d6,stroke:#a16207,stroke-width:2px,color:#713f12
+    classDef service fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef framework fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef durable fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    class UI frontend
+    class API,POLICY,TOOLS,ORDERS,MODEL service
+    class GRAPH,CHECKPOINT framework
+    class AGENTDB,BIZDB durable

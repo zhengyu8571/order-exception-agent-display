@@ -1,0 +1,30 @@
+flowchart TB
+    accTitle: OrderFlow HTTP 接口与应用装配模块架构
+CLIENT["🌐 浏览器 / API 客户端"]
+    subgraph CORE["HTTP 接口与应用装配 · FastAPI"]
+        APP["app.py / lifespan<br/>依赖装配与资源关闭"]
+        AUTH["auth.py<br/>身份与主管权限"]
+        TASK["task_routes.py<br/>创建 / 审批 / 恢复 / SSE"]
+        ORDER["order_routes.py<br/>订单查询与演示场景代理"]
+        ERROR["errors.py<br/>领域异常映射"]
+        APP --> TASK
+        APP --> ORDER
+        TASK --> AUTH
+        ORDER --> AUTH
+        APP --> ERROR
+    end
+    SERVICE["TaskService"]
+    TOOLS["OrderTools"]
+    SAVER["LangGraph PostgresSaver<br/>独立 Checkpoint 连接池"]
+    CLIENT -->|"HTTP / SSE"| TASK
+    CLIENT --> ORDER
+    TASK --> SERVICE
+    ORDER --> TOOLS
+    APP -->|"构建 graph 并注入任务服务"| SAVER
+    class APP,AUTH,TASK,ORDER,ERROR component
+    class SAVER framework
+    class CLIENT,SERVICE,TOOLS external
+classDef component fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef framework fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef durable fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    classDef external fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,color:#334155

@@ -1,0 +1,31 @@
+flowchart TB
+    accTitle: OrderFlow 持久化与数据库访问模块架构
+CALLER["TaskService / Agent / 业务服务"]
+    subgraph CORE["项目持久化模块"]
+        TASK["task_repository.py<br/>任务 / 批准 / 事件 / 会话锁"]
+        MODEL["model_repository.py<br/>模型预算与响应账本"]
+        INV["investigation_repository.py<br/>调查去重与预算"]
+        MIG["migrations.py + sql/<br/>项目迁移与校验和"]
+        POOL["database.py<br/>连接上下文与进程级池"]
+        TASK --> POOL
+        MODEL --> POOL
+        INV --> POOL
+        MIG --> POOL
+    end
+    DB[("💾 PostgreSQL<br/>agent / business 表")]
+    SAVER["transport 装配 PostgresSaver<br/>独立连接池与框架迁移"]
+    CHECKPOINT[("同一 PostgreSQL<br/>LangGraph Checkpoint 表")]
+    CALLER --> TASK
+    CALLER --> MODEL
+    CALLER --> INV
+    CALLER --> POOL
+    POOL --> DB
+    SAVER --> CHECKPOINT
+    class TASK,MODEL,INV,MIG,POOL component
+    class DB,CHECKPOINT durable
+    class SAVER framework
+    class CALLER external
+classDef component fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef framework fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef durable fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    classDef external fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,color:#334155

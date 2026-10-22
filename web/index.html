@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>OrderFlow · 订单异常协同</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="brand" href="/"
+        ><span class="brand-mark">↗</span><span>OrderFlow<small>订单异常协同</small></span></a
+      >
+      <div class="workspace">工作空间 <span>DEMO</span></div>
+      <nav>
+        <a class="nav-item selected" href="/"
+          >▦ <span>异常工作台</span><span class="nav-dot"></span></a
+        ><a class="nav-item" href="/docs" target="_blank"
+          >⌘ <span>接口文档</span><small>↗</small></a
+        >
+      </nav>
+      <div class="sidebar-note">
+        <span class="note-icon">◇</span><strong>每一次决策，都有迹可循</strong>
+        <p>从异常调查到人工审批，让订单处理有序推进。</p>
+      </div>
+      <div class="identity">
+        <div class="avatar">主</div>
+        <div><strong id="role-label">审批主管</strong><small>本地演示工作空间</small></div>
+        <button id="settings" class="icon-btn" title="切换访问身份">⚙</button>
+      </div>
+    </aside>
+    <main>
+      <header>
+        <div class="breadcrumb">工作空间 <span>/</span> 异常工作台</div>
+        <div class="live">
+          <i></i> <span id="connection">连接中</span><span class="mode" id="mode">—</span>
+          <button id="settings-mobile" class="icon-btn" title="切换访问身份">身份</button>
+        </div>
+      </header>
+      <section class="page">
+        <div class="page-title">
+          <div>
+            <div class="eyebrow">ORDER EXCEPTION OPERATIONS</div>
+            <h1>让每一笔异常订单，继续向前。</h1>
+            <p>调查原因，审阅方案，可靠地完成交付计划调整。</p>
+          </div>
+          <button class="primary" id="new-task">＋ 创建异常任务</button>
+        </div>
+        <div class="metrics">
+          <article>
+            <span>全部任务</span><strong id="metric-total">0</strong><small>当前工作空间</small>
+          </article>
+          <article>
+            <span><i class="dot amber"></i> 等待审批</span><strong id="metric-wait">0</strong
+            ><small>需要你的决策</small>
+          </article>
+          <article>
+            <span><i class="dot green"></i> 已完成</span><strong id="metric-done">0</strong
+            ><small>业务结果已验证</small>
+          </article>
+          <article>
+            <span><i class="dot purple"></i> 待恢复 / 调整</span
+            ><strong id="metric-recover">0</strong><small>含处理中 · 按登记状态统计</small>
+          </article>
+        </div>
+        <div class="workbench">
+          <section class="task-panel">
+            <div class="panel-title">
+              <h2>异常任务 <span id="task-count">0</span></h2>
+              <button id="refresh" class="text-btn">↻ 刷新</button>
+            </div>
+            <div class="filters">
+              <button data-filter="all" class="active">全部</button
+              ><button data-filter="WAITING_APPROVAL">待审批</button
+              ><button data-filter="COMPLETED">已完成</button
+              ><button data-filter="attention">待处理</button>
+            </div>
+            <label class="search"
+              >⌕ <input id="search" maxlength="100" placeholder="搜索订单编号或任务…"
+            /></label>
+            <div id="task-list"></div>
+            <div class="pagination">
+              <button id="page-prev" class="text-btn" disabled>上一页</button
+              ><span id="page-info">0 / 0</span
+              ><button id="page-next" class="text-btn" disabled>下一页</button>
+            </div>
+          </section>
+          <section class="detail-panel" id="detail">
+            <div class="empty">
+              <span class="empty-icon">◇</span>
+              <h2>清晰的方案，从一次调查开始</h2>
+              <p>创建一个库存不足任务，查看调查信息、候选方案与审批记录。</p>
+              <button class="secondary" id="empty-create">创建第一个任务 ↗</button>
+              <div class="empty-flow">
+                调查 <span>→</span> 方案 <span>→</span> 审批 <span>→</span> 执行
+              </div>
+            </div>
+          </section>
+        </div>
+        <footer>
+          制造业库存不足场景 · 模拟业务数据<span
+            >计划调整完成不代表实际调拨、采购到货或出库完成。</span
+          >
+        </footer>
+      </section>
+    </main>
+    <dialog id="create-dialog">
+      <form id="create-form">
+        <div class="dialog-heading">
+          <div>
+            <small>NEW EXCEPTION</small>
+            <h2>创建异常处理任务</h2>
+          </div>
+          <button type="button" class="icon-btn close">×</button>
+        </div>
+        <p>选择一笔库存不足订单，开始调查与方案生成。</p>
+        <label>异常订单<select id="order-select" required></select></label>
+        <label
+          >新增模拟订单的数据场景<select id="scenario-profile">
+            <option value="">基础库存不足（演示）</option>
+            <option value="A">A · 多仓调拨与成本权衡</option>
+            <option value="B">B · 分批到货，客户允许分批</option>
+            <option value="C">C · 到货延迟，不允许分批</option>
+            <option value="D">D · 调拨与采购组合</option>
+            <option value="E">E · 总资源不足</option>
+            <option value="F">F · 审批期间资源变化实验</option>
+          </select></label
+        >
+        <p class="task-subtitle" id="scenario-note"></p>
+        <div class="callout">◇ 系统会查询订单、仓库和采购信息。所有业务修改都需要主管审批。</div>
+        <div class="dialog-actions">
+          <button type="button" id="seed-scenario" class="text-btn">＋ 新增演示订单</button
+          ><button class="primary" type="submit">开始调查 →</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="auth-dialog">
+      <form id="auth-form">
+        <div class="dialog-heading">
+          <h2>访问身份</h2>
+          <button type="button" class="icon-btn close">×</button>
+        </div>
+        <p>访问令牌仅保存在当前浏览器中。</p>
+        <label
+          >访问令牌<input id="token-input" type="password" required autocomplete="off"
+        /></label>
+        <div class="quick-roles">
+          <button type="button" data-token="local-supervisor" class="secondary">演示主管</button
+          ><button type="button" data-token="local-operator" class="secondary">演示操作员</button>
+        </div>
+        <button class="primary" type="submit">确认身份</button>
+      </form>
+    </dialog>
+    <dialog id="decision-dialog">
+      <form id="decision-form">
+        <div class="dialog-heading">
+          <h2 id="decision-title">确认审批</h2>
+          <button type="button" class="icon-btn close">×</button>
+        </div>
+        <p id="decision-description"></p>
+        <div id="decision-summary"></div>
+        <label
+          >审批备注<textarea
+            id="comment"
+            maxlength="1000"
+            placeholder="可填写决策依据或调整意见"
+          ></textarea>
+        </label>
+        <div class="callout">
+          批准将立即进行执行前校验。订单发生变化时，系统会要求重新调查和审批。
+        </div>
+        <div class="dialog-actions">
+          <button type="button" class="secondary close">返回</button
+          ><button class="primary" type="submit" id="decision-submit">确认批准</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" role="status"></div>
+    <div id="activity" class="activity" role="status" hidden>
+      正在处理请求，请勿重复提交。处理记录会持续显示执行进度。
+    </div>
+    <script type="module" src="/assets/app.js"></script>
+  </body>
+</html>

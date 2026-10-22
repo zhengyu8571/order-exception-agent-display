@@ -1,0 +1,27 @@
+flowchart TD
+    accTitle: OrderFlow 中文业务流程概览
+    accDescr: 从异常订单调查、模型方案与规则反馈，到主管审批、资源复核、幂等修改及结果验证。复杂恢复路径在详细版单独展开。
+    S01(["👤 创建库存不足处理任务"]) --> S02["调查订单、库存、采购与约束"]
+    S02 --> S03["Agent 基于证据补查与提出方案"]
+    S03 --> S04{"业务规则校验"}
+    S04 -->|"可修正"| S03
+    S04 -->|"无解或预算耗尽"| S05["转人工处理"]
+    S04 -->|"合法"| S06["等待主管审批<br/>LangGraph interrupt 保存中断"]
+    S06 -->|"拒绝"| S07["本轮停止执行"]
+    S06 -->|"批准并保存审批"| S08["复核最新资源、日期与批准内容"]
+    S08 -->|"事实变化或时效不足"| S09["方案过期<br/>需重新调查和审批"]
+    S08 -->|"仍然有效"| S10["稳定操作 ID + 事务操作账本<br/>幂等修改交付计划"]
+    S10 --> S11["查询并核验订单与操作记录"]
+    S11 -->|"一致"| S12(["✓ 交付计划调整完成"])
+    S11 -->|"无法确认"| S14["保留可恢复状态<br/>核查后显式继续"]
+
+    classDef business fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+    classDef framework fill:#ede9fe,stroke:#6d28d9,stroke-width:2px,color:#3b0764
+    classDef decision fill:#fff7d6,stroke:#a16207,stroke-width:2px,color:#713f12
+    classDef stop fill:#fff1f2,stroke:#be123c,stroke-width:2px,color:#881337
+    classDef durable fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+    class S01,S02,S03,S08,S11 business
+    class S06 framework
+    class S04 decision
+    class S05,S07,S09,S14 stop
+    class S10,S12 durable
